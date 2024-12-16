@@ -19,6 +19,7 @@ import (
 	"github.com/open-telemetry/opentelemetry-collector-contrib/processor/resourcedetectionprocessor/internal/gcp"
 	"github.com/open-telemetry/opentelemetry-collector-contrib/processor/resourcedetectionprocessor/internal/heroku"
 	"github.com/open-telemetry/opentelemetry-collector-contrib/processor/resourcedetectionprocessor/internal/k8snode"
+	"github.com/open-telemetry/opentelemetry-collector-contrib/processor/resourcedetectionprocessor/internal/oci"
 	"github.com/open-telemetry/opentelemetry-collector-contrib/processor/resourcedetectionprocessor/internal/openshift"
 	"github.com/open-telemetry/opentelemetry-collector-contrib/processor/resourcedetectionprocessor/internal/system"
 )
@@ -80,6 +81,9 @@ type DetectorConfig struct {
 	// SystemConfig contains user-specified configurations for the System detector
 	SystemConfig system.Config `mapstructure:"system"`
 
+	// OciConfig contains user-specified configurations for the oci detector
+	OciConfig oci.Config `mapstructure:"oci"`
+
 	// OpenShift contains user-specified configurations for the Openshift detector
 	OpenShiftConfig openshift.Config `mapstructure:"openshift"`
 
@@ -101,6 +105,7 @@ func detectorCreateDefaultConfig() DetectorConfig {
 		GcpConfig:              gcp.CreateDefaultConfig(),
 		HerokuConfig:           heroku.CreateDefaultConfig(),
 		SystemConfig:           system.CreateDefaultConfig(),
+		OciConfig:              oci.CreateDefaultConfig(),
 		OpenShiftConfig:        openshift.CreateDefaultConfig(),
 		K8SNodeConfig:          k8snode.CreateDefaultConfig(),
 	}
@@ -132,6 +137,8 @@ func (d *DetectorConfig) GetConfigFromType(detectorType internal.DetectorType) i
 		return d.HerokuConfig
 	case system.TypeStr:
 		return d.SystemConfig
+	case oci.TypeStr:
+		return d.OciConfig
 	case openshift.TypeStr:
 		return d.OpenShiftConfig
 	case k8snode.TypeStr:

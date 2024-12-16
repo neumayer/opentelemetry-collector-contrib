@@ -1,0 +1,40 @@
+type: resourcedetectionprocessor/oci
+
+parent: resourcedetection
+resource_attributes:
+  oci.availability.domain:
+    description: The availability domain
+    type: string
+    enabled: true
+  oci.compartment.id:
+    description: The compartment id name
+    type: string
+    enabled: true
+  oci.instance.id:
+    description: The instance id
+    type: string
+    enabled: true
+  oci.instance.displayname:
+    description: The instance display name
+    type: string
+    enabled: true
+  oci.instance.region:
+    description: The instance region
+    type: string
+    enabled: true
+  oci.instance.state:
+    description: The state of the instance
+    type: string
+    enabled: true
+  oci.canonicalregionname:
+    description: The canonical region name
+    type: string
+    enabled: true
+  oci.owner:
+    description: The owner of the resource
+    type: string
+    enabled: true
+  cloud.provider:
+    description: The cloud.provider
+    type: string
+    enabled: true
